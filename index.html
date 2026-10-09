@@ -71,6 +71,13 @@
       .section-head p{text-align:left}
     }
 
+
+    .latest-grid{padding-bottom:8px}
+    .latest-row{border-color:#38b6ff35;background:linear-gradient(100deg,#121d2d,#121725)}
+    .latest-tag{flex:0 0 auto;color:var(--bg);background:var(--lime);border-radius:5px;padding:5px 7px;font:9px 'DM Mono',monospace;letter-spacing:.06em}
+    #latestSection{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:8px}
+    @media(max-width:380px){.latest-tag{grid-column:2;justify-self:start}.latest-row .play{grid-column:2}}
+
   </style>
 </head>
 <body>
@@ -79,7 +86,7 @@
     <div id="gamesPage">
     <section class="hero"><div><div class="eyebrow">Pilih game. Gas main.</div><img class="hero-logo" src="logo.png" alt="VIP Pro Gaming — Premium Gaming, Ultimate Comfort"><p>Katalog game VIP Pro Gaming. Cari judul game dan pilih kategori Online atau Offline.</p></div><div class="hero-stat"><div class="stat"><b id="totalCount">—</b><span>Total game</span></div><div class="stat"><b id="onlineCount">—</b><span>Game online</span></div><div class="stat"><b id="offlineCount">—</b><span>Game offline</span></div></div></section>
     <section class="toolbar" aria-label="Filter game"><div class="search"><input id="search" type="search" placeholder="Cari judul game…" aria-label="Cari game"></div><div class="filters"><button class="chip" data-type="all">Semua</button><button class="chip active" data-type="online">Online</button><button class="chip" data-type="offline">Offline</button></div><span class="status" id="status"><i class="live-dot"></i> DATA DEMO</span><button class="sync" id="refresh">↻ Segarkan</button></section>
-    <section><div class="section-head"><h2>Daftar game</h2><p id="resultCount">0 game</p></div><div class="grid" id="gameGrid"></div></section>
+    <section id="latestSection"><div class="section-head"><h2>Game terbaru</h2><p id="latestCount">0 game terbaru</p></div><div class="grid latest-grid" id="latestGrid"></div></section><section><div class="section-head"><h2>Daftar game</h2><p id="resultCount">0 game</p></div><div class="grid" id="gameGrid"></div></section>
     </div>
     <section id="specsPage" hidden><div class="spec-intro"><div class="eyebrow">Pilih setup favoritmu</div><h1>Spesifikasi<br>komputer<em style="color:var(--lime)">.</em></h1><p>Dua pilihan PC gaming tersedia di VIP Pro Gaming. Tanyakan kepada staff untuk memilih paket saat bermain.</p></div><div class="spec-grid">
       <article class="spec-card"><div class="spec-label">Paket 01</div><h2>Ultimate</h2><div class="spec-list"><div class="spec-row"><span>Processor</span><strong>Core i5 Gen 14</strong></div><div class="spec-row"><span>Memori</span><strong>RAM 16GB</strong></div><div class="spec-row"><span>Kartu grafis</span><strong>RX 6700 XT · 12GB</strong></div><div class="spec-row"><span>Pendingin CPU</span><strong>Standar Cooler</strong></div><div class="spec-row"><span>Monitor</span><strong>LG UltraGear · 165Hz</strong></div></div></article>
@@ -107,11 +114,15 @@
     function render(){
       const q=$('#search').value.trim().toLowerCase();
       const matches=games.filter(g=>(type==='all'||g.type===type)&&(!q||g.title.toLowerCase().includes(q)));
+      const latest=games.filter(g=>g.featured);
       $('#totalCount').textContent=games.length;
       $('#onlineCount').textContent=games.filter(g=>g.type==='online').length;
       $('#offlineCount').textContent=games.filter(g=>g.type==='offline').length;
       $('#resultCount').textContent=`Menampilkan ${matches.length} game`;
-      $('#gameGrid').innerHTML=matches.length?matches.map((g,i)=>`<article class="game-row"><span class="game-number">${i+1}</span><div class="game-info"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="game-type">${g.type==='online'?'● ONLINE':'◌ OFFLINE'}</span></div>${g.link?`<a class="play" href="${esc(g.link)}" target="_blank" rel="noopener">Info game ↗</a>`:''}</article>`).join(''):`<div class="empty"><strong>Game tidak ditemukan</strong>Coba kata kunci atau filter yang lain.</div>`;
+      $('#latestCount').textContent=`${latest.length} game terbaru`;
+      $('#latestSection').hidden=latest.length===0;
+      $('#latestGrid').innerHTML=latest.length?latest.map((g,i)=>`<article class="game-row latest-row"><span class="game-number">${i+1}</span><div class="game-info"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="game-type">${g.type==='online'?'● ONLINE':'◌ OFFLINE'}</span></div>${g.link&&g.link!=='#'?`<a class="play" href="${esc(g.link)}" target="_blank" rel="noopener">Info game ↗</a>`:''}<span class="latest-tag">BARU</span></article>`).join(''):'';
+      $('#gameGrid').innerHTML=matches.length?matches.map((g,i)=>`<article class="game-row"><span class="game-number">${i+1}</span><div class="game-info"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="game-type">${g.type==='online'?'● ONLINE':'◌ OFFLINE'}</span></div>${g.link&&g.link!=='#'?`<a class="play" href="${esc(g.link)}" target="_blank" rel="noopener">Info game ↗</a>`:''}</article>`).join(''):`<div class="empty"><strong>Game tidak ditemukan</strong>Coba kata kunci atau filter yang lain.</div>`;
     }
     function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
     async function load(){const url=SHEET_CSV_URL;if(!url){games=[...DEMO];$('#status').innerHTML='<i class="live-dot"></i> DATA DEMO';$('#status').className='status';render();$('#updated').textContent='DEMO';return}$('#status').textContent='MENGAMBIL DATA…';$('#status').className='status loading';try{const response=await fetch(url,{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=csvParse(await response.text());games=data.map(norm).filter(g=>g.title);render();$('#status').innerHTML='<i class="live-dot"></i> TERHUBUNG';$('#status').className='status';$('#updated').textContent='DIPERBARUI '+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});}catch(e){$('#status').textContent='GAGAL MEMUAT SHEET';$('#status').className='status error';$('#updated').textContent='KONEKSI BERMASALAH';if(!games.length){games=[...DEMO];render()}}}
