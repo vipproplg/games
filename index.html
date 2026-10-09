@@ -125,6 +125,15 @@
     .ps-section{padding-bottom:26px}.ps-console-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 14px}.ps-console-tabs .chip{padding:12px 10px}.ps-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding-bottom:24px}.ps-game-row{display:flex;align-items:center;gap:12px;min-width:0;padding:14px 15px;background:var(--panel);border:1px solid #ffffff0b;border-radius:12px}.ps-game-number{flex:0 0 24px;color:var(--muted);font:10px 'DM Mono',monospace;text-align:center}.ps-game-title{font-size:14px;font-weight:600;line-height:1.4;min-width:0;overflow-wrap:anywhere}.ps-note{color:var(--muted);font-size:12px;margin:-6px 0 16px}
     @media(max-width:700px){.ps-intro{padding:38px 0 24px}.ps-console-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.ps-console-tabs .chip{padding:10px 4px;font-size:10px}.ps-grid{grid-template-columns:minmax(0,1fr)!important;gap:8px;padding-bottom:20px}.ps-game-row{padding:12px;gap:10px}.ps-game-title{font-size:14px}.ps-section .section-head{align-items:flex-start;gap:10px}.ps-section .section-head p{text-align:right;line-height:1.5}}
 
+
+    /* Warna status kategori pada daftar dan filter */
+    .game-type.online-status{color:#35d07f!important}
+    .game-type.offline-status{color:#ff5c68!important}
+    .chip[data-type="online"]{color:#35d07f}
+    .chip[data-type="offline"]{color:#ff5c68}
+    .chip[data-type="online"].active{color:#07140d}
+    .chip[data-type="offline"].active{color:#fff}
+
   </style>
 </head>
 <body>
@@ -191,8 +200,8 @@
       $('#resultCount').textContent=`Menampilkan ${matches.length} game`;
       $('#latestCount').textContent=`${latest.length} game terbaru`;
       $('#latestSection').hidden=latest.length===0;
-      $('#latestGrid').innerHTML=latest.length?latest.map((g,i)=>`<article class="game-row latest-row"><span class="game-number">${i+1}</span><div class="game-info"><div class="latest-title-line"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="latest-tag">BARU</span></div><span class="game-type">${g.type==='online'?'● ONLINE':'◌ OFFLINE'}</span></div>${g.link&&g.link!=='#'?`<a class="play" href="${esc(g.link)}" target="_blank" rel="noopener">Info game ↗</a>`:''}</article>`).join(''):'';
-      $('#gameGrid').innerHTML=matches.length?matches.map((g,i)=>`<article class="game-row"><span class="game-number">${i+1}</span><div class="game-info"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="game-type">${g.type==='online'?'● ONLINE':'◌ OFFLINE'}</span></div>${g.link&&g.link!=='#'?`<a class="play" href="${esc(g.link)}" target="_blank" rel="noopener">Info game ↗</a>`:''}</article>`).join(''):`<div class="empty"><strong>Game tidak ditemukan</strong>Coba kata kunci atau filter yang lain.</div>`;
+      $('#latestGrid').innerHTML=latest.length?latest.map((g,i)=>`<article class="game-row latest-row"><span class="game-number">${i+1}</span><div class="game-info"><div class="latest-title-line"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="latest-tag">BARU</span></div><span class="game-type ${g.type==='online'?'online-status':'offline-status'}">${g.type==='online'?'● ONLINE':'● OFFLINE'}</span></div>${g.link&&g.link!=='#'?`<a class="play" href="${esc(g.link)}" target="_blank" rel="noopener">Info game ↗</a>`:''}</article>`).join(''):'';
+      $('#gameGrid').innerHTML=matches.length?matches.map((g,i)=>`<article class="game-row"><span class="game-number">${i+1}</span><div class="game-info"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="game-type ${g.type==='online'?'online-status':'offline-status'}">${g.type==='online'?'● ONLINE':'● OFFLINE'}</span></div>${g.link&&g.link!=='#'?`<a class="play" href="${esc(g.link)}" target="_blank" rel="noopener">Info game ↗</a>`:''}</article>`).join(''):`<div class="empty"><strong>Game tidak ditemukan</strong>Coba kata kunci atau filter yang lain.</div>`;
     }
     function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
     async function load(){const url=SHEET_CSV_URL;if(!url){games=[...DEMO];$('#status').innerHTML='<i class="live-dot"></i> DATA DEMO';$('#status').className='status';render();$('#updated').textContent='DEMO';return}$('#status').textContent='MENGAMBIL DATA…';$('#status').className='status loading';try{const response=await fetch(url,{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=csvParse(await response.text());games=data.map(norm).filter(g=>g.title);render();$('#status').innerHTML='<i class="live-dot"></i> TERHUBUNG';$('#status').className='status';$('#updated').textContent='DIPERBARUI '+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});}catch(e){$('#status').textContent='GAGAL MEMUAT SHEET';$('#status').className='status error';$('#updated').textContent='KONEKSI BERMASALAH';if(!games.length){games=[...DEMO];render()}}}
