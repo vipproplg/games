@@ -59,7 +59,12 @@
       .foot{gap:8px;overflow-wrap:anywhere}
       .spec-row{font-size:12px}
     }
+    /* Jarak statistik lebih rapi di mobile: angka tidak menempel ke tepi kiri */
+    @media(max-width:700px){
+      .hero-stat .stat:first-child{padding-left:12px}
+    }
     @media(max-width:380px){
+      .hero-stat .stat:first-child{padding-left:10px}
       .wrap{padding-left:12px;padding-right:12px}
       .game-row{grid-template-columns:22px minmax(0,1fr);gap:8px}
       .game-number{width:22px}
