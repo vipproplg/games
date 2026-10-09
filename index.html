@@ -121,16 +121,28 @@
       #latestSection .latest-title-line .latest-tag{font-size:7px;padding:4px 5px}
     }
 
+
+    .ps-section{padding-bottom:26px}.ps-console-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 14px}.ps-console-tabs .chip{padding:12px 10px}.ps-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding-bottom:24px}.ps-game-row{display:flex;align-items:center;gap:12px;min-width:0;padding:14px 15px;background:var(--panel);border:1px solid #ffffff0b;border-radius:12px}.ps-game-number{flex:0 0 24px;color:var(--muted);font:10px 'DM Mono',monospace;text-align:center}.ps-game-title{font-size:14px;font-weight:600;line-height:1.4;min-width:0;overflow-wrap:anywhere}.ps-note{color:var(--muted);font-size:12px;margin:-6px 0 16px}
+    @media(max-width:700px){.ps-intro{padding:38px 0 24px}.ps-console-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.ps-console-tabs .chip{padding:10px 4px;font-size:10px}.ps-grid{grid-template-columns:minmax(0,1fr)!important;gap:8px;padding-bottom:20px}.ps-game-row{padding:12px;gap:10px}.ps-game-title{font-size:14px}.ps-section .section-head{align-items:flex-start;gap:10px}.ps-section .section-head p{text-align:right;line-height:1.5}}
+
   </style>
 </head>
 <body>
-  <header class="wrap topbar"><div class="brand">VIP <span>PRO GAMING</span></div><nav class="main-nav" aria-label="Menu utama"><button class="nav-tab active" data-page="games">Daftar Game</button><button class="nav-tab" data-page="specs">Spesifikasi PC</button></nav><div class="nav-right"><i class="live-dot"></i> GAME LIBRARY <span>·</span> <span id="updated">MEMUAT…</span></div></header>
+  <header class="wrap topbar"><div class="brand">VIP <span>PRO GAMING</span></div><nav class="main-nav" aria-label="Menu utama"><button class="nav-tab active" data-page="games">Game PC</button><button class="nav-tab" data-page="playstation">PlayStation</button><button class="nav-tab" data-page="specs">Spesifikasi PC</button></nav><div class="nav-right"><i class="live-dot"></i> GAME LIBRARY <span>·</span> <span id="updated">MEMUAT…</span></div></header>
   <main class="wrap">
     <div id="gamesPage">
     <section class="hero"><div><div class="eyebrow">Pilih game. Gas main.</div><img class="hero-logo" src="logo.png" alt="VIP Pro Gaming — Premium Gaming, Ultimate Comfort"><p>Katalog game VIP Pro Gaming. Cari judul game dan pilih kategori Online atau Offline.</p></div><div class="hero-stat"><div class="stat"><b id="totalCount">—</b><span>Total game</span></div><div class="stat"><b id="onlineCount">—</b><span>Game online</span></div><div class="stat"><b id="offlineCount">—</b><span>Game offline</span></div></div></section>
     <section class="toolbar" aria-label="Filter game"><div class="search"><input id="search" type="search" placeholder="Cari judul game…" aria-label="Cari game"></div><div class="filters"><button class="chip" data-type="all">Semua</button><button class="chip active" data-type="online">Online</button><button class="chip" data-type="offline">Offline</button></div><span class="status" id="status"><i class="live-dot"></i> DATA DEMO</span><button class="sync" id="refresh">↻ Segarkan</button></section>
     <section id="latestSection"><div class="section-head"><h2>Game terbaru</h2><p id="latestCount">0 game terbaru</p></div><div class="grid latest-grid" id="latestGrid"></div></section><section><div class="section-head"><h2>Daftar game</h2><p id="resultCount">0 game</p></div><div class="grid" id="gameGrid"></div></section>
     </div>
+    <section id="playstationPage" hidden>
+      <div class="spec-intro ps-intro"><div class="eyebrow">VIP Pro Gaming · Console Zone</div><h1>PlayStation<br>Library<em style="color:var(--lime)">.</em></h1><p>Pilih konsol untuk melihat game PS5 yang tersedia. Koleksi PS4 tersedia di semua konsol PlayStation.</p></div>
+      <section class="ps-section"><div class="section-head"><h2>Game PS5 per konsol</h2><p id="psCount">9 game</p></div>
+        <div class="ps-console-tabs" role="group" aria-label="Pilih konsol PlayStation"><button class="chip active" data-console="PS-01">PS-01</button><button class="chip" data-console="PS-02">PS-02</button><button class="chip" data-console="PS-03">PS-03</button><button class="chip" data-console="PS-04">PS-04</button></div>
+        <div class="grid ps-grid" id="ps5Grid"></div>
+      </section>
+      <section class="ps-section ps4-section"><div class="section-head"><h2>Koleksi PS4</h2><p>READY ALL PS · 8 GAME</p></div><p class="ps-note">Game berikut tersedia di semua konsol PlayStation.</p><div class="grid ps-grid" id="ps4Grid"></div></section>
+    </section>
     <section id="specsPage" hidden><div class="spec-intro"><div class="eyebrow">Pilih setup favoritmu</div><h1>Spesifikasi<br>komputer<em style="color:var(--lime)">.</em></h1><p>Dua pilihan PC gaming tersedia di VIP Pro Gaming. Tanyakan kepada staff untuk memilih paket saat bermain.</p></div><div class="spec-grid">
       <article class="spec-card"><div class="spec-label">Paket 01</div><h2>Ultimate</h2><div class="spec-list"><div class="spec-row"><span>Processor</span><strong>Core i5 Gen 14</strong></div><div class="spec-row"><span>Memori</span><strong>RAM 16GB</strong></div><div class="spec-row"><span>Kartu grafis</span><strong>RX 6700 XT · 12GB</strong></div><div class="spec-row"><span>Pendingin CPU</span><strong>Standar Cooler</strong></div><div class="spec-row"><span>Monitor</span><strong>LG UltraGear · 165Hz</strong></div></div></article>
       <article class="spec-card"><div class="spec-label">Paket 02 · Upgrade</div><h2>Ultimate Max</h2><div class="spec-list"><div class="spec-row"><span>Processor</span><strong>Core i5 Gen 14</strong></div><div class="spec-row"><span>Memori</span><strong>RAM 40GB</strong></div><div class="spec-row"><span>Kartu grafis</span><strong>RX 6700 XT · 12GB</strong></div><div class="spec-row"><span>Pendingin CPU</span><strong>Liquid Cooler</strong></div><div class="spec-row"><span>Monitor</span><strong>LG UltraGear · 165Hz</strong></div></div></article>
@@ -154,6 +166,21 @@
     const $=s=>document.querySelector(s), clean=v=>(v??'').toString().trim();
     function csvParse(text){const rows=[];let row=[],cell='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(quoted){if(c==='"'&&text[i+1]==='"'){cell+='"';i++}else if(c==='"')quoted=false;else cell+=c}else if(c==='"')quoted=true;else if(c===','){row.push(cell);cell=''}else if(c==='\n'){row.push(cell);rows.push(row);row=[];cell=''}else if(c!=='\r')cell+=c}if(cell||row.length){row.push(cell);rows.push(row)}const heads=(rows.shift()||[]).map(x=>clean(x).toLowerCase());return rows.filter(r=>r.some(Boolean)).map(r=>Object.fromEntries(heads.map((h,i)=>[h,clean(r[i])])))}
     function norm(row){return {title:row.title||row.game||'Untitled',type:/off/i.test(row.type||row.mode)?'offline':'online',image:row.image||row.image_url||'',link:row.link||row.url||'',featured:/^(1|true|yes|ya|unggulan)$/i.test(row.featured||'')}}
+    const PS5_GAMES = {
+      'PS-01':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','Split Fiction','MotoGP 25','Naruto x Boruto UNS Connection','F1 24','NBA 2K25'],
+      'PS-02':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','Naruto x Boruto UNS Connection','F1 24','Split Fiction','NBA 2K25','Gran Turismo 7'],
+      'PS-03':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','WWE 2K25','MotoGP25','F1 24','Split Fiction'],
+      'PS-04':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','F1 24','Split Fiction','MotoGP 25','Naruto x Boruto UNS Connection']
+    };
+    const PS4_GAMES = ['Battlefiled V','Crash Bandicoot Insane Trilogy','Dragon Ball Z Kakarot','God of War','it Takes Two','Jump Force','Overcooked','The Last of us Part II'];
+    let selectedConsole='PS-01';
+    function renderPlayStation(){
+      const list=PS5_GAMES[selectedConsole]||[];
+      $('#psCount').textContent=`${list.length} game`;
+      $('#ps5Grid').innerHTML=list.map((name,i)=>`<article class="ps-game-row"><span class="ps-game-number">${i+1}</span><div class="ps-game-title">${esc(name)}</div></article>`).join('');
+      $('#ps4Grid').innerHTML=PS4_GAMES.map((name,i)=>`<article class="ps-game-row"><span class="ps-game-number">${i+1}</span><div class="ps-game-title">${esc(name)}</div></article>`).join('');
+    }
+    document.querySelectorAll('[data-console]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-console]').forEach(x=>x.classList.toggle('active',x===b));selectedConsole=b.dataset.console;renderPlayStation()}));
     function render(){
       const q=$('#search').value.trim().toLowerCase();
       const matches=games.filter(g=>(type==='all'||g.type===type)&&(!q||g.title.toLowerCase().includes(q)));
@@ -169,7 +196,7 @@
     }
     function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
     async function load(){const url=SHEET_CSV_URL;if(!url){games=[...DEMO];$('#status').innerHTML='<i class="live-dot"></i> DATA DEMO';$('#status').className='status';render();$('#updated').textContent='DEMO';return}$('#status').textContent='MENGAMBIL DATA…';$('#status').className='status loading';try{const response=await fetch(url,{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=csvParse(await response.text());games=data.map(norm).filter(g=>g.title);render();$('#status').innerHTML='<i class="live-dot"></i> TERHUBUNG';$('#status').className='status';$('#updated').textContent='DIPERBARUI '+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});}catch(e){$('#status').textContent='GAGAL MEMUAT SHEET';$('#status').className='status error';$('#updated').textContent='KONEKSI BERMASALAH';if(!games.length){games=[...DEMO];render()}}}
-    document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');type=b.dataset.type;render()}));document.querySelectorAll('.nav-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav-tab').forEach(x=>x.classList.toggle('active',x===b));const specs=b.dataset.page==='specs';$('#gamesPage').hidden=specs;$('#specsPage').hidden=!specs}));$('#search').addEventListener('input',render);$('#refresh').addEventListener('click',load);load();setInterval(load,300000);
+    document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');type=b.dataset.type;render()}));document.querySelectorAll('.nav-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav-tab').forEach(x=>x.classList.toggle('active',x===b));const page=b.dataset.page;$('#gamesPage').hidden=page!=='games';$('#playstationPage').hidden=page!=='playstation';$('#specsPage').hidden=page!=='specs';if(page==='playstation')renderPlayStation()}));$('#search').addEventListener('input',render);$('#refresh').addEventListener('click',load);load();setInterval(load,300000);
   </script>
 </body>
 </html>
