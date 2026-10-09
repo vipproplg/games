@@ -102,6 +102,25 @@
       #latestSection .latest-tag{grid-column:2;justify-self:start;margin-top:2px}
     }
 
+
+    /* Badge BARU berada bersama judul, bukan di bawah kartu */
+    .latest-title-line{display:flex;align-items:center;gap:8px;min-width:0;max-width:100%;flex-wrap:wrap}
+    .latest-title-line h3{min-width:0}
+    .latest-title-line .latest-tag{display:inline-flex;align-items:center;flex:0 0 auto;margin:0}
+    @media(max-width:700px){
+      #latestSection .latest-row{grid-template-columns:24px minmax(0,1fr) auto;align-items:center}
+      #latestSection .latest-row .game-info{min-width:0;width:100%}
+      #latestSection .latest-title-line{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:7px;flex-wrap:wrap}
+      #latestSection .latest-title-line h3{font-size:14px;line-height:1.35;overflow-wrap:anywhere}
+      #latestSection .latest-title-line .latest-tag{font-size:8px;padding:4px 6px;white-space:nowrap}
+    }
+    @media(max-width:380px){
+      #latestSection .latest-row{grid-template-columns:20px minmax(0,1fr) auto;gap:7px}
+      #latestSection .latest-row .play{grid-column:auto;justify-self:end;margin:0}
+      #latestSection .latest-title-line h3{font-size:13px}
+      #latestSection .latest-title-line .latest-tag{font-size:7px;padding:4px 5px}
+    }
+
   </style>
 </head>
 <body>
@@ -145,7 +164,7 @@
       $('#resultCount').textContent=`Menampilkan ${matches.length} game`;
       $('#latestCount').textContent=`${latest.length} game terbaru`;
       $('#latestSection').hidden=latest.length===0;
-      $('#latestGrid').innerHTML=latest.length?latest.map((g,i)=>`<article class="game-row latest-row"><span class="game-number">${i+1}</span><div class="game-info"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="game-type">${g.type==='online'?'● ONLINE':'◌ OFFLINE'}</span></div>${g.link&&g.link!=='#'?`<a class="play" href="${esc(g.link)}" target="_blank" rel="noopener">Info game ↗</a>`:''}<span class="latest-tag">BARU</span></article>`).join(''):'';
+      $('#latestGrid').innerHTML=latest.length?latest.map((g,i)=>`<article class="game-row latest-row"><span class="game-number">${i+1}</span><div class="game-info"><div class="latest-title-line"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="latest-tag">BARU</span></div><span class="game-type">${g.type==='online'?'● ONLINE':'◌ OFFLINE'}</span></div>${g.link&&g.link!=='#'?`<a class="play" href="${esc(g.link)}" target="_blank" rel="noopener">Info game ↗</a>`:''}</article>`).join(''):'';
       $('#gameGrid').innerHTML=matches.length?matches.map((g,i)=>`<article class="game-row"><span class="game-number">${i+1}</span><div class="game-info"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="game-type">${g.type==='online'?'● ONLINE':'◌ OFFLINE'}</span></div>${g.link&&g.link!=='#'?`<a class="play" href="${esc(g.link)}" target="_blank" rel="noopener">Info game ↗</a>`:''}</article>`).join(''):`<div class="empty"><strong>Game tidak ditemukan</strong>Coba kata kunci atau filter yang lain.</div>`;
     }
     function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -154,3 +173,4 @@
   </script>
 </body>
 </html>
+
