@@ -25,6 +25,52 @@
     @media(max-width:520px){.game-row{gap:9px;padding:12px}.game-number{flex-basis:22px}.game-info{align-items:flex-start;flex-direction:column;gap:5px}.game-info h3{font-size:14px}.play{white-space:nowrap}}
     .spec-intro{padding:65px 0 30px}.spec-intro h1{font-size:clamp(42px,6vw,76px);letter-spacing:-.07em;line-height:.98;margin:15px 0}.spec-intro p{color:var(--muted);line-height:1.7;max-width:550px}.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:18px 0}.spec-card{background:linear-gradient(145deg,#1d211a,#151713);border:1px solid var(--line);border-radius:20px;padding:26px;position:relative;overflow:hidden}.spec-card:after{content:'PC';position:absolute;right:22px;top:12px;color:#ffffff08;font-size:100px;font-weight:700;letter-spacing:-.1em}.spec-label{font:10px 'DM Mono',monospace;color:var(--lime);letter-spacing:.16em;text-transform:uppercase}.spec-card h2{font-size:32px;letter-spacing:-.06em;margin:8px 0 24px}.spec-list{display:grid;gap:0}.spec-row{display:flex;justify-content:space-between;gap:16px;border-top:1px solid #ffffff12;padding:14px 0;font-size:13px}.spec-row span{color:var(--muted)}.spec-row strong{text-align:right;font-weight:600}.spec-extra{max-width:720px;margin:0 auto 70px}.address{color:var(--muted);font-size:10px;letter-spacing:0;text-transform:none}
     @media(max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}.cover{height:185px}}@media(max-width:700px){.wrap{padding:0 20px}.topbar{height:auto;min-height:64px;flex-wrap:wrap;padding-top:12px;padding-bottom:10px}.main-nav{order:3;width:100%}.nav-tab{flex:1;padding:9px 5px}.hero{grid-template-columns:1fr;padding:48px 0 34px}.hero-stat{justify-content:flex-start}.hero h1{font-size:clamp(48px,15vw,72px)}.toolbar{align-items:stretch}.search{flex-basis:100%}.filters{order:2}.grid{grid-template-columns:repeat(2,1fr);gap:10px}.cover{height:150px}.card-body{padding:12px}.card h3{font-size:16px}.desc{font-size:11px}.foot{flex-direction:column}.nav-right{font-size:9px}.spec-grid{grid-template-columns:1fr}.spec-card{padding:22px}.spec-card h2{font-size:28px}}@media(max-width:420px){.grid{grid-template-columns:1fr 1fr}.cover{height:125px}.hero-stat{gap:20px}.stat b{font-size:23px}.chip{padding:9px 11px}}
+
+    /* Perbaikan responsif khusus daftar game di layar HP */
+    @media(max-width:700px){
+      .wrap{padding-left:16px;padding-right:16px}
+      .topbar{gap:10px}
+      .brand{font-size:14px}
+      .nav-right{width:100%;justify-content:flex-start;flex-wrap:wrap;gap:8px}
+      .hero{padding:30px 0 24px;gap:22px}
+      .hero-logo{max-width:100%;margin:14px 0}
+      .hero p{font-size:13px}
+      .hero-stat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;width:100%;padding:0}
+      .stat{padding-left:10px;min-width:0}
+      .stat:first-child{padding-left:0}
+      .stat b{font-size:clamp(20px,6vw,27px);overflow-wrap:anywhere}
+      .stat span{font-size:8px;letter-spacing:.06em;line-height:1.4}
+      .toolbar{gap:12px;padding:14px 0}
+      .search{flex:1 1 100%;min-width:0}
+      .filters{order:initial;width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+      .chip{padding:10px 8px;text-align:center}
+      .status{flex:1 1 auto}
+      .sync{padding:8px 0}
+      .section-head{align-items:flex-start;gap:12px;padding:22px 0 14px}
+      .section-head h2{font-size:18px}
+      .section-head p{text-align:right;font-size:9px;line-height:1.5}
+      .grid{grid-template-columns:minmax(0,1fr)!important;gap:8px;padding-bottom:32px}
+      .game-row{display:grid;grid-template-columns:26px minmax(0,1fr) auto;align-items:center;gap:10px;padding:13px 12px}
+      .game-number{flex:none;width:26px;font-size:10px}
+      .game-info{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;min-width:0}
+      .game-info h3{font-size:14px;line-height:1.4;white-space:normal;overflow-wrap:anywhere;word-break:normal}
+      .game-type{font-size:8px;letter-spacing:.04em}
+      .play{font-size:10px;white-space:nowrap;align-self:center}
+      .foot{gap:8px;overflow-wrap:anywhere}
+      .spec-row{font-size:12px}
+    }
+    @media(max-width:380px){
+      .wrap{padding-left:12px;padding-right:12px}
+      .game-row{grid-template-columns:22px minmax(0,1fr);gap:8px}
+      .game-number{width:22px}
+      .game-row .play{grid-column:2;justify-self:start;margin-top:2px}
+      .game-info h3{font-size:13px}
+      .stat{padding-left:7px}
+      .stat span{font-size:7px}
+      .section-head{flex-direction:column}
+      .section-head p{text-align:left}
+    }
+
   </style>
 </head>
 <body>
