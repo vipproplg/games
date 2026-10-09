@@ -36,8 +36,7 @@
       .hero-logo{max-width:100%;margin:14px 0}
       .hero p{font-size:13px}
       .hero-stat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;width:100%;padding:0}
-      .stat{padding-left:10px;min-width:0}
-      .stat:first-child{padding-left:0}
+      .stat{padding-left:12px;min-width:0}
       .stat b{font-size:clamp(20px,6vw,27px);overflow-wrap:anywhere}
       .stat span{font-size:8px;letter-spacing:.06em;line-height:1.4}
       .toolbar{gap:12px;padding:14px 0}
@@ -59,18 +58,13 @@
       .foot{gap:8px;overflow-wrap:anywhere}
       .spec-row{font-size:12px}
     }
-    /* Jarak statistik lebih rapi di mobile: angka tidak menempel ke tepi kiri */
-    @media(max-width:700px){
-      .hero-stat .stat:first-child{padding-left:12px}
-    }
     @media(max-width:380px){
-      .hero-stat .stat:first-child{padding-left:10px}
       .wrap{padding-left:12px;padding-right:12px}
       .game-row{grid-template-columns:22px minmax(0,1fr);gap:8px}
       .game-number{width:22px}
       .game-row .play{grid-column:2;justify-self:start;margin-top:2px}
       .game-info h3{font-size:13px}
-      .stat{padding-left:7px}
+      .stat{padding-left:12px}
       .stat span{font-size:7px}
       .section-head{flex-direction:column}
       .section-head p{text-align:left}
