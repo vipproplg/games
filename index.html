@@ -177,10 +177,10 @@
     function csvParse(text){const rows=[];let row=[],cell='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(quoted){if(c==='"'&&text[i+1]==='"'){cell+='"';i++}else if(c==='"')quoted=false;else cell+=c}else if(c==='"')quoted=true;else if(c===','){row.push(cell);cell=''}else if(c==='\n'){row.push(cell);rows.push(row);row=[];cell=''}else if(c!=='\r')cell+=c}if(cell||row.length){row.push(cell);rows.push(row)}const heads=(rows.shift()||[]).map(x=>clean(x).toLowerCase());return rows.filter(r=>r.some(Boolean)).map(r=>Object.fromEntries(heads.map((h,i)=>[h,clean(r[i])])))}
     function norm(row){return {title:row.title||row.game||'Untitled',type:/off/i.test(row.type||row.mode)?'offline':'online',image:row.image||row.image_url||'',link:row.link||row.url||'',featured:/^(1|true|yes|ya|unggulan)$/i.test(row.featured||''),gdrive:/^(1|true|yes|ya|unggulan|tersedia)$/i.test(row.gdrive||'')}}
     const PS5_GAMES = {
-      'PS-01':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','Split Fiction','MotoGP 25','Naruto x Boruto UNS Connection','F1 24','NBA 2K25'],
-      'PS-02':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','Naruto x Boruto UNS Connection','F1 24','Split Fiction','NBA 2K25','Gran Turismo 7'],
-      'PS-03':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','WWE 2K25','MotoGP25','F1 24','Split Fiction'],
-      'PS-04':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','F1 24','Split Fiction','MotoGP 25','Naruto x Boruto UNS Connection']
+      'PS-01':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','Split Fiction','F1 24','Naruto x Boruto UNS Connection','MotoGP 25','WWE 2K25'],
+      'PS-02':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','Split Fiction','F1 24','Naruto x Boruto UNS Connection','MotoGP 25','Gran Turismo 7','NBA 2K25'],
+      'PS-03':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','Split Fiction','F1 24','Naruto x Boruto UNS Connection','MotoGP 25','Gran Turismo 7','WWE 2K25'],
+      'PS-04':['eFootball 2026','EA FC25',"Astro' Playroom",'Roblox','Split Fiction','F1 24','Naruto x Boruto UNS Connection','MotoGP 25','NBA 2K25','WWE 2K25']
     };
     const PS4_GAMES = ['Battlefiled V','Crash Bandicoot Insane Trilogy','Dragon Ball Z Kakarot','God of War','it Takes Two','Jump Force','Overcooked','The Last of us Part II'];
     let selectedConsole='PS-01';
