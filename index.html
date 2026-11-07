@@ -125,6 +125,15 @@
     @media(max-width:700px){.ps-intro{padding:38px 0 24px}.ps-console-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.ps-console-tabs .chip{padding:10px 4px;font-size:10px}.ps-grid{grid-template-columns:minmax(0,1fr)!important;gap:8px;padding-bottom:20px}.ps-game-row{padding:12px;gap:10px}.ps-game-title{font-size:14px}.ps-section .section-head{align-items:flex-start;gap:10px}.ps-section .section-head p{text-align:right;line-height:1.5}}
 
 
+
+    /* Daftar emulator: tampilan baris tanpa thumbnail seperti Game PC */
+    .emulator-toolbar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .emulator-toolbar .search{flex:1;min-width:220px}
+    .emulator-list{display:grid;grid-template-columns:1fr;gap:8px;padding-bottom:56px}
+    .emulator-page-intro{padding:48px 0 24px}
+    .emulator-page-intro h1{font-size:clamp(42px,6vw,68px);letter-spacing:-.07em;line-height:.98;margin:12px 0}
+    .emulator-page-intro p{color:var(--muted);line-height:1.7;max-width:550px;margin:0}
+    @media(max-width:700px){.emulator-page-intro{padding:34px 0 22px}.emulator-toolbar{align-items:stretch;padding:14px 0}.emulator-toolbar .search{flex:1 1 100%;min-width:0}.emulator-list{padding-bottom:32px}}
     /* Warna status kategori pada daftar dan filter */
     .game-type.online-status{color:#35d07f!important}
     .game-status-line{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
@@ -138,7 +147,7 @@
   </style>
 </head>
 <body>
-  <header class="wrap topbar"><div class="brand">VIP <span>PRO GAMING</span></div><nav class="main-nav" aria-label="Menu utama"><button class="nav-tab active" data-page="games">Game PC</button><button class="nav-tab" data-page="playstation">PlayStation</button><button class="nav-tab" data-page="specs">Spesifikasi PC</button></nav><div class="nav-right"><i class="live-dot"></i> GAME LIBRARY <span>·</span> <span id="updated">MEMUAT…</span></div></header>
+  <header class="wrap topbar"><div class="brand">VIP <span>PRO GAMING</span></div><nav class="main-nav" aria-label="Menu utama"><button class="nav-tab active" data-page="games">Game PC</button><button class="nav-tab" data-page="playstation">PlayStation</button><button class="nav-tab" data-page="ps1">Emulator PS1</button><button class="nav-tab" data-page="ps2">Emulator PS2</button><button class="nav-tab" data-page="specs">Spesifikasi PC</button></nav><div class="nav-right"><i class="live-dot"></i> GAME LIBRARY <span>·</span> <span id="updated">MEMUAT…</span></div></header>
   <main class="wrap">
     <div id="gamesPage">
     <section class="hero"><div><div class="eyebrow">Pilih game. Gas main.</div><img class="hero-logo" src="logo.png" alt="VIP Pro Gaming — Premium Gaming, Ultimate Comfort"><p>Katalog game VIP Pro Gaming. Cari judul game dan pilih kategori Online atau Offline.</p></div><div class="hero-stat"><div class="stat"><b id="totalCount">—</b><span>Total game</span></div><div class="stat"><b id="onlineCount">—</b><span>Game online</span></div><div class="stat"><b id="offlineCount">—</b><span>Game offline</span></div></div></section>
@@ -153,6 +162,16 @@
       </section>
       <section class="ps-section ps4-section"><div class="section-head"><h2>Koleksi PS4</h2><p>READY ALL PS · 8 GAME</p></div><p class="ps-note">Game berikut tersedia di semua konsol PlayStation.</p><div class="grid ps-grid" id="ps4Grid"></div></section>
     </section>
+    <section id="ps1Page" hidden class="emulator-page">
+      <div class="emulator-page-intro"><div class="eyebrow">VIP Pro Gaming · Emulator Zone</div><h1>PlayStation 1<br>Library<em style="color:var(--lime)">.</em></h1><p>Koleksi game emulator PS1. Daftar tanpa gambar, mengikuti desain Game PC.</p></div>
+      <section class="emulator-toolbar" aria-label="Pencarian game PS1"><div class="search"><input id="ps1Search" type="search" placeholder="Cari game PS1…" aria-label="Cari game PS1"></div><span class="status" id="ps1Status">LINK SHEET BELUM DIISI</span><button class="sync" id="ps1Refresh">↻ Segarkan</button></section>
+      <div class="section-head"><h2>Daftar game PS1</h2><p id="ps1Count">0 game</p></div><div class="emulator-list" id="ps1Grid"></div>
+    </section>
+    <section id="ps2Page" hidden class="emulator-page">
+      <div class="emulator-page-intro"><div class="eyebrow">VIP Pro Gaming · Emulator Zone</div><h1>PlayStation 2<br>Library<em style="color:var(--lime)">.</em></h1><p>Koleksi game emulator PS2. Daftar tanpa gambar, mengikuti desain Game PC.</p></div>
+      <section class="emulator-toolbar" aria-label="Pencarian game PS2"><div class="search"><input id="ps2Search" type="search" placeholder="Cari game PS2…" aria-label="Cari game PS2"></div><span class="status" id="ps2Status">LINK SHEET BELUM DIISI</span><button class="sync" id="ps2Refresh">↻ Segarkan</button></section>
+      <div class="section-head"><h2>Daftar game PS2</h2><p id="ps2Count">0 game</p></div><div class="emulator-list" id="ps2Grid"></div>
+    </section>
     <section id="specsPage" hidden><div class="spec-intro"><div class="eyebrow">Pilih setup favoritmu</div><h1>Spesifikasi<br>komputer<em style="color:var(--lime)">.</em></h1><p>Dua pilihan PC gaming tersedia di VIP Pro Gaming. Tanyakan kepada staff untuk memilih paket saat bermain.</p></div><div class="spec-grid">
       <article class="spec-card"><div class="spec-label">Paket 01</div><h2>Ultimate</h2><div class="spec-list"><div class="spec-row"><span>Processor</span><strong>Core i5 Gen 14</strong></div><div class="spec-row"><span>Memori</span><strong>RAM 16GB</strong></div><div class="spec-row"><span>Kartu grafis</span><strong>RX 6700 XT · 12GB</strong></div><div class="spec-row"><span>Pendingin CPU</span><strong>Standar Cooler</strong></div><div class="spec-row"><span>Monitor</span><strong>LG UltraGear · 165Hz</strong></div></div></article>
       <article class="spec-card"><div class="spec-label">Paket 02 · Upgrade</div><h2>Ultimate Max</h2><div class="spec-list"><div class="spec-row"><span>Processor</span><strong>Core i5 Gen 14</strong></div><div class="spec-row"><span>Memori</span><strong style="color: red; font-weight: 800;">RAM 40GB</strong></div><div class="spec-row"><span>Kartu grafis</span><strong>RX 6700 XT · 12GB</strong></div><div class="spec-row"><span>Pendingin CPU</span><strong style="color: red; font-weight: 800;">Liquid Cooler</strong></div><div class="spec-row"><span>Monitor</span><strong>LG UltraGear · 165Hz</strong></div></div></article>
@@ -162,6 +181,10 @@
   <script>
     // Ganti URL di bawah dengan URL CSV Google Sheets. Petunjuk ada di PANDUAN.md.
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQwr7PzEtR6Q--tyCU6zUK-iXAt7Ze1ObWKCN8D5F1rhw9cBHiopq6rkNuZOyFoRO_62c3JtD5yluUH/pub?gid=0&single=true&output=csv';
+    // Isi dengan link CSV publik untuk masing-masing tab PS1 dan PS2.
+    const PS1_SHEET_CSV_URL = '';
+    const PS2_SHEET_CSV_URL = '';
+
     const DEMO = [
       {title:'VALORANT',type:'online',genre:'FPS · Tactical',platform:'PC',description:'Tunjukkan aim dan strategi terbaikmu dalam tactical shooter 5v5.',image:'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80',link:''},
       {title:'Counter-Strike 2',type:'online',genre:'FPS · Tactical',platform:'PC',description:'Pertarungan klasik terorist melawan counter-terrorist.',image:'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=80',link:''},
@@ -206,9 +229,35 @@
       $('#gameGrid').innerHTML=matches.length?matches.map((g,i)=>`<article class="game-row"><span class="game-number">${i+1}</span><div class="game-info"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><div class="game-status-line"><span class="game-type ${g.type==='online'?'online-status':'offline-status'}">${g.type==='online'?'● ONLINE':'● OFFLINE'}</span>${g.type==='offline'&&g.gdrive?'<span class="gdrive-tag">Save to GDrive ✓</span>':''}</div></div><a class="play" href="${esc(gameplayUrl(g.title))}" target="_blank" rel="noopener noreferrer">Info game ↗</a></article>`).join(''):`<div class="empty"><strong>Game tidak ditemukan</strong>Coba kata kunci atau filter yang lain.</div>`;
     }
     function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+    const emulatorData={
+      ps1:{url:https://docs.google.com/spreadsheets/d/e/2PACX-1vQwr7PzEtR6Q--tyCU6zUK-iXAt7Ze1ObWKCN8D5F1rhw9cBHiopq6rkNuZOyFoRO_62c3JtD5yluUH/pubhtml?gid=1645934782&single=true,games:[],grid:'#ps1Grid',search:'#ps1Search',count:'#ps1Count',status:'#ps1Status'},
+      ps2:{url:https://docs.google.com/spreadsheets/d/e/2PACX-1vQwr7PzEtR6Q--tyCU6zUK-iXAt7Ze1ObWKCN8D5F1rhw9cBHiopq6rkNuZOyFoRO_62c3JtD5yluUH/pubhtml?gid=1640121372&single=true,games:[],grid:'#ps2Grid',search:'#ps2Search',count:'#ps2Count',status:'#ps2Status'}
+    };
+    function renderEmulator(kind){
+      const c=emulatorData[kind],q=$(c.search).value.trim().toLowerCase();
+      const rows=c.games.filter(g=>g.title.toLowerCase().includes(q));
+      $(c.count).textContent=`Menampilkan ${rows.length} game`;
+      $(c.grid).innerHTML=rows.length?rows.map((g,i)=>`<article class="game-row"><span class="game-number">${i+1}</span><div class="game-info"><h3 title="${esc(g.title)}">${esc(g.title)}</h3><span class="game-type">${kind.toUpperCase()}</span></div><a class="play" href="${esc(gameplayUrl(g.title+' gameplay'))}" target="_blank" rel="noopener noreferrer">Info game ↗</a></article>`).join(''):`<div class="empty"><strong>${c.games.length?'Game tidak ditemukan':'Daftar game belum tersedia'}</strong>${c.games.length?'Coba kata kunci lain.':'Tambahkan URL CSV sheet '+kind.toUpperCase()+' pada konfigurasi di HTML.'}</div>`;
+    }
+    async function loadEmulator(kind){
+      const c=emulatorData[kind];
+      if(!c.url){$(c.status).textContent='LINK SHEET BELUM DIISI';c.games=[];renderEmulator(kind);return}
+      $(c.status).textContent='MENGAMBIL DATA…';$(c.status).className='status loading';
+      try{
+        const r=await fetch(c.url,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);
+        const rows=csvParse(await r.text());
+        c.games=rows.map(x=>({title:clean(x.title||x.game||x.nama)})).filter(x=>x.title);
+        renderEmulator(kind);$(c.status).innerHTML='<i class="live-dot"></i> TERHUBUNG';$(c.status).className='status';
+      }catch(e){$(c.status).textContent='GAGAL MEMUAT SHEET';$(c.status).className='status error';$(c.grid).innerHTML='<div class="empty"><strong>Data belum dapat dimuat</strong>Periksa link publikasi CSV Google Sheets.</div>'}
+    }
+    $('#ps1Search').addEventListener('input',()=>renderEmulator('ps1'));
+    $('#ps2Search').addEventListener('input',()=>renderEmulator('ps2'));
+    $('#ps1Refresh').addEventListener('click',()=>loadEmulator('ps1'));
+    $('#ps2Refresh').addEventListener('click',()=>loadEmulator('ps2'));
+
     async function load(){const url=SHEET_CSV_URL;if(!url){games=[...DEMO];$('#status').innerHTML='<i class="live-dot"></i> DATA DEMO';$('#status').className='status';render();$('#updated').textContent='DEMO';return}$('#status').textContent='MENGAMBIL DATA…';$('#status').className='status loading';try{const response=await fetch(url,{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=csvParse(await response.text());games=data.map(norm).filter(g=>g.title);render();$('#status').innerHTML='<i class="live-dot"></i> TERHUBUNG';$('#status').className='status';$('#updated').textContent='DIPERBARUI '+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});}catch(e){$('#status').textContent='GAGAL MEMUAT SHEET';$('#status').className='status error';$('#updated').textContent='KONEKSI BERMASALAH';if(!games.length){games=[...DEMO];render()}}}
-    document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');type=b.dataset.type;render()}));document.querySelectorAll('.nav-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav-tab').forEach(x=>x.classList.toggle('active',x===b));const page=b.dataset.page;$('#gamesPage').hidden=page!=='games';$('#playstationPage').hidden=page!=='playstation';$('#specsPage').hidden=page!=='specs';if(page==='playstation')renderPlayStation()}));$('#search').addEventListener('input',render);$('#refresh').addEventListener('click',load);load();setInterval(load,300000);
+    document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');type=b.dataset.type;render()}));document.querySelectorAll('.nav-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav-tab').forEach(x=>x.classList.toggle('active',x===b));const page=b.dataset.page;$('#gamesPage').hidden=page!=='games';$('#playstationPage').hidden=page!=='playstation';$('#ps1Page').hidden=page!=='ps1';$('#ps2Page').hidden=page!=='ps2';$('#specsPage').hidden=page!=='specs';if(page==='playstation')renderPlayStation();if(page==='ps1')loadEmulator('ps1');if(page==='ps2')loadEmulator('ps2')}));$('#search').addEventListener('input',render);$('#refresh').addEventListener('click',load);load();setInterval(load,300000);
   </script>
 </body>
 </html>
-
